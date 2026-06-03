@@ -53,7 +53,7 @@ export default function PerformanceHero() {
           transition={{ duration: 0.8, delay: 0.35 }}
           className="mt-8 max-w-xl text-white/60 text-lg leading-relaxed"
         >
-          NitricX works at the cellular level — elevating nitric oxide production,
+          NitricX works at the cellular level, elevating nitric oxide production,
           improving oxygen delivery, and priming your muscles for peak output.
           No synthetic stimulants. No shortcuts.
         </motion.p>

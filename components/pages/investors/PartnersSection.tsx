@@ -6,12 +6,12 @@ const partners = [
   {
     name: "Power Brands",
     role: "Production & Commercialization",
-    detail: "Van Nuys, CA — Beverage specialists with 200+ brand launches and established retail relationships with every major US chain.",
+    detail: "Van Nuys, CA. Beverage specialists with 200+ brand launches and established retail relationships with every major US chain.",
   },
   {
     name: "Flavorman",
     role: "Formulation & R&D",
-    detail: "Louisville, KY — Award-winning beverage R&D company with over 30 years of expertise in functional drink formulation.",
+    detail: "Louisville, KY. Award-winning beverage R&D company with over 30 years of expertise in functional drink formulation.",
   },
   {
     name: "VDF FutureCeuticals",
@@ -65,7 +65,7 @@ export default function PartnersSection() {
             <span className="w-8 h-px bg-crimson" /> Retail Distribution Pipeline
           </div>
           <p className="text-white/50 text-sm max-w-xl">
-            Power Brands has established commercial relationships with the following retail chains — NitricX is positioned for placement across all of them upon launch.
+            Power Brands has established commercial relationships with the following retail chains. NitricX is positioned for placement across all of them upon launch.
           </p>
         </motion.div>
 

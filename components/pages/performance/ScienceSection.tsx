@@ -7,7 +7,7 @@ const phases = [
   { n: "01", t: "Activation", d: "Within 15–30 minutes, elevated nitric oxide levels begin expanding blood vessels. Vasodilation is measurable before you touch a weight." },
   { n: "02", t: "Peak Output", d: "At full effect, oxygen and nutrient delivery to working muscles is optimized. Strength, endurance, and power output all improve simultaneously." },
   { n: "03", t: "Sustained Flow", d: "Unlike synthetic stimulants that spike and crash, the S7® effect builds gradually and holds. Your performance window extends, not compresses." },
-  { n: "04", t: "Recovery Mode", d: "Post-session, the antioxidant and anti-inflammatory stack (Tart Cherry, Turmeric, Blueberry) continues working — reducing soreness, accelerating repair." },
+  { n: "04", t: "Recovery Mode", d: "Post-session, the antioxidant and anti-inflammatory stack (Tart Cherry, Turmeric, Blueberry) continues working, reducing soreness and accelerating repair." },
 ];
 
 export default function ScienceSection() {
@@ -31,7 +31,7 @@ export default function ScienceSection() {
             <span className="metallic">behind the flow.</span>
           </h2>
           <p className="mt-6 text-white/55 leading-relaxed">
-            NitricX works in four distinct phases — from first sip to final rep and beyond. Understanding the timeline is understanding the edge.
+            NitricX works in four distinct phases, from first sip to final rep and beyond. Understanding the timeline is understanding the edge.
           </p>
         </motion.div>
 

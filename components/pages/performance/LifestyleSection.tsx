@@ -25,7 +25,7 @@ export default function LifestyleSection() {
               <span className="metallic">looks like this.</span>
             </h2>
             <p className="text-white/55 leading-relaxed mb-6">
-              NitricX is built for athletes who take their craft seriously. Whether you&apos;re training for a competition, a personal record, or just refusing to accept average — this formula was engineered for you.
+              NitricX is built for athletes who take their craft seriously. Whether you&apos;re training for a competition, a personal record, or just refusing to accept average, this formula was engineered for you.
             </p>
             <p className="text-white/40 text-sm leading-relaxed">
               12 oz slim can. Carbonated. No artificial dyes. No synthetic caffeine.

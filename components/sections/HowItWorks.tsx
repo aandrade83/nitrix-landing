@@ -6,7 +6,7 @@ const steps = [
     number: "01",
     title: "Mix & Activate",
     description:
-      "Add one scoop to 12–16 oz of cold water. The S7® Blend dissolves instantly — no clumping, no chalky residue.",
+      "Add one scoop to 12–16 oz of cold water. The S7® Blend dissolves instantly with no clumping and no chalky residue.",
   },
   {
     number: "02",

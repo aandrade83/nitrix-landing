@@ -24,7 +24,7 @@ const s7 = [
     dose: "Part of S7® 50 mg",
     role: "Anti-Inflammation",
     description:
-      "Curcumin in turmeric blocks NF-κB signaling — the primary inflammatory pathway activated during intense training — for faster inter-session recovery.",
+      "Curcumin in turmeric blocks NF-κB signaling, the primary inflammatory pathway activated during intense training, for faster inter-session recovery.",
     color: "from-yellow-900/40 to-transparent",
   },
   {
@@ -48,7 +48,7 @@ const s7 = [
     dose: "Part of S7® 50 mg",
     role: "Cellular Defense",
     description:
-      "Sulforaphane from broccoli sprout activates Nrf2 — the master antioxidant switch — triggering your body's own internal defense system for cellular protection.",
+      "Sulforaphane from broccoli sprout activates Nrf2, the master antioxidant switch, triggering your body's own internal defense system for cellular protection.",
     color: "from-green-800/40 to-transparent",
   },
   {
@@ -56,7 +56,7 @@ const s7 = [
     dose: "Part of S7® 50 mg",
     role: "Micronutrient Density",
     description:
-      "A complete micronutrient matrix — Vitamins K, A, C, B6, calcium, iron, copper, and manganese — supporting energy metabolism and oxygen utilization at the cellular level.",
+      "A complete micronutrient matrix of Vitamins K, A, C, B6, calcium, iron, copper, and manganese, supporting energy metabolism and oxygen utilization at the cellular level.",
     color: "from-lime-900/40 to-transparent",
   },
 ];

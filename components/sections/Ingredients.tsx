@@ -64,7 +64,7 @@ export default function Ingredients() {
             <p className="text-zinc-400 text-lg leading-relaxed">
               Every ingredient in NitricX was selected because the science
               is unambiguous. No proprietary blends that hide underdosed
-              ingredients — full label transparency, always.
+              ingredients. Full label transparency, always.
             </p>
           </div>
         </SectionReveal>

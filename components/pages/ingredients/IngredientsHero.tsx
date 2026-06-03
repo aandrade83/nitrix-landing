@@ -35,7 +35,7 @@ export default function IngredientsHero() {
           transition={{ duration: 0.8, delay: 0.35 }}
           className="mt-8 max-w-xl text-white/60 text-lg leading-relaxed"
         >
-          NitricX contains 13 carefully selected ingredients — each chosen for a specific, documented purpose. No fillers. No proprietary blend cover-ups.
+          NitricX contains 13 carefully selected ingredients, each chosen for a specific, documented purpose. No fillers. No proprietary blend cover-ups.
           Every dose shown exactly as it is.
         </motion.p>
       </div>

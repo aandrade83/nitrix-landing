@@ -6,7 +6,7 @@ const benefits = [
   {
     icon: "⚡",
     title: "Clean Energy Surge",
-    body: "Green Coffee Bean and Green Tea deliver a smooth, sustained energy boost — no adrenal crash, no jitter. Just clean, focused power from the first sip.",
+    body: "Green Coffee Bean and Green Tea deliver a smooth, sustained energy boost with no adrenal crash and no jitter. Just clean, focused power from the first sip.",
     metric: "~150 mg natural caffeine per serving",
   },
   {
@@ -30,7 +30,7 @@ const benefits = [
   {
     icon: "🌿",
     title: "Cellular Defense",
-    body: "Kale and Broccoli Sprout provide dense micronutrients and sulforaphane — activating your body's own antioxidant defenses at a genetic level.",
+    body: "Kale and Broccoli Sprout provide dense micronutrients and sulforaphane, activating your body's own antioxidant defenses at a genetic level.",
     metric: "Nrf2 pathway activation",
   },
   {

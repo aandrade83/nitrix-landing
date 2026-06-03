@@ -7,7 +7,7 @@ const supporting = [
     name: "Magnesium Taurate",
     dose: "1.12 g",
     role: "Muscle Function & Recovery",
-    description: "Magnesium is essential for ATP synthesis — the energy currency of every muscle contraction. Taurate form ensures superior absorption and bioavailability versus oxide or citrate forms.",
+    description: "Magnesium is essential for ATP synthesis, the energy currency of every muscle contraction. Taurate form ensures superior absorption and bioavailability versus oxide or citrate forms.",
   },
   {
     name: "Bluava® Agave",
@@ -19,25 +19,25 @@ const supporting = [
     name: "Evaporated Coconut Water",
     dose: "5.26 g",
     role: "Electrolyte Hydration",
-    description: "Nature's sports drink. Rich in potassium, sodium, and magnesium — the three electrolytes most depleted during intense exercise. Replenishes without artificial additives.",
+    description: "Nature's sports drink. Rich in potassium, sodium, and magnesium, the three electrolytes most depleted during intense exercise. Replenishes without artificial additives.",
   },
   {
     name: "L-Malic Acid",
     dose: "0.18 g",
     role: "Energy Metabolism",
-    description: "An intermediate in the Krebs cycle — the biochemical pathway that converts nutrients into ATP. Supports energy production efficiency during sustained output.",
+    description: "An intermediate in the Krebs cycle, the biochemical pathway that converts nutrients into ATP. Supports energy production efficiency during sustained output.",
   },
   {
     name: "Citric Acid",
     dose: "0.50 g",
     role: "pH Balance & Flavor",
-    description: "Natural citric acid from citrus fruits. Maintains optimal pH, enhances flavor profile, and acts as a natural preservative — zero synthetic alternatives needed.",
+    description: "Natural citric acid from citrus fruits. Maintains optimal pH, enhances flavor profile, and acts as a natural preservative with zero synthetic alternatives needed.",
   },
   {
     name: "Carbonated Water",
     dose: "to volume",
     role: "Delivery & Absorption",
-    description: "Light carbonation enhances palatability and may improve gastric emptying rate — meaning the formula reaches your bloodstream faster after consumption.",
+    description: "Light carbonation enhances palatability and may improve gastric emptying rate, meaning the formula reaches your bloodstream faster after consumption.",
   },
 ];
 

@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const phases = [
-  { n: "01", t: "Performance isn't instant.", d: "It begins quietly — circulation, oxygen, intent." },
+  { n: "01", t: "Performance isn't instant.", d: "It begins quietly. Circulation, oxygen, intent." },
   { n: "02", t: "It builds.", d: "Plant-powered S7® primes the body to do what it does best." },
   { n: "03", t: "You feel it.", d: "A clean activation. No jitter. No crash. Just signal." },
   { n: "04", t: "Then you ride it.", d: "Flow state, sustained. Pure, natural performance." },

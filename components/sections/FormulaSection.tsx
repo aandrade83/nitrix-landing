@@ -47,8 +47,8 @@ export default function FormulaSection() {
               <span className="metallic">Performance-forward.</span>
             </h2>
             <p className="mt-6 text-white/60 max-w-xl leading-relaxed">
-              The S7® core — a clinically researched blend of seven plant-based
-              ingredients — sits at the heart of NitricX. Supported by Magnesium
+              The S7® core, a clinically researched blend of seven plant-based
+              ingredients, sits at the heart of NitricX. Supported by Magnesium
               Taurate, Bluava® agave, and evaporated coconut water for a clean,
               natural athletic profile.
             </p>

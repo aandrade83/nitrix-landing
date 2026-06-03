@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const guarantees = [
-  { icon: "🔬", title: "Clinically Researched", body: "The S7® Blend is backed by peer-reviewed, double-blind clinical research — not marketing copy." },
+  { icon: "🔬", title: "Clinically Researched", body: "The S7® Blend is backed by peer-reviewed, double-blind clinical research, not marketing copy." },
   { icon: "📋", title: "Full Label Disclosure", body: "Every ingredient listed with its exact dose. No 'proprietary blend' hiding underdosed actives." },
   { icon: "🌿", title: "Plant-Based Only", body: "Zero synthetic stimulants. Zero artificial colors or dyes. 100% plant-derived active ingredients." },
   { icon: "✅", title: "Trademarked Formula", body: "NITRIC X™ is a USPTO-registered trademark. The formula is protected intellectual property." },
