@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 const images = [
   { src: "/images/IMG_3256.jpeg", alt: "NitricX athlete", className: "col-span-1 row-span-2" },
@@ -10,7 +11,28 @@ const images = [
   { src: "/images/IMG_4552-2_JPG.jpg", alt: "NitricX session", className: "col-span-1 row-span-1" },
 ];
 
+const content = {
+  en: {
+    eyebrow: "Real Athletes. Real Results.",
+    titleA: "Performance",
+    titleB: "looks like this.",
+    body: "NitricX is built for athletes who take their craft seriously. Whether you're training for a competition, a personal record, or just refusing to accept average, this formula was engineered for you.",
+    specs: "12 oz slim can. Carbonated. No artificial dyes. No synthetic caffeine. Evaporated coconut water. Bluava® agave. The S7® Blend.",
+    imageAlt: "NitricX performance",
+  },
+  es: {
+    eyebrow: "Atletas Reales. Resultados Reales.",
+    titleA: "El rendimiento",
+    titleB: "se ve así.",
+    body: "NitricX está hecha para atletas que se toman en serio su disciplina. Ya sea que entrenes para una competencia, un récord personal o simplemente te niegues a conformarte con lo promedio, esta fórmula fue diseñada para ti.",
+    specs: "Lata slim de 12 oz. Carbonatada. Sin colorantes artificiales. Sin cafeína sintética. Agua de coco evaporada. Agave Bluava®. El S7® Blend.",
+    imageAlt: "Rendimiento NitricX",
+  },
+};
+
 export default function LifestyleSection() {
+  const t = content[useLocale()];
+
   return (
     <section className="py-24 lg:py-32">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -18,18 +40,17 @@ export default function LifestyleSection() {
           {/* Copy */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
             <div className="text-eyebrow flex items-center gap-3 mb-5">
-              <span className="w-8 h-px bg-crimson" /> Real Athletes. Real Results.
+              <span className="w-8 h-px bg-crimson" /> {t.eyebrow}
             </div>
             <h2 className="text-display text-5xl md:text-6xl mb-6">
-              Performance<br />
-              <span className="metallic">looks like this.</span>
+              {t.titleA}<br />
+              <span className="metallic">{t.titleB}</span>
             </h2>
             <p className="text-white/55 leading-relaxed mb-6">
-              NitricX is built for athletes who take their craft seriously. Whether you&apos;re training for a competition, a personal record, or just refusing to accept average, this formula was engineered for you.
+              {t.body}
             </p>
             <p className="text-white/40 text-sm leading-relaxed">
-              12 oz slim can. Carbonated. No artificial dyes. No synthetic caffeine.
-              Evaporated coconut water. Bluava® agave. The S7® Blend.
+              {t.specs}
             </p>
           </motion.div>
 
@@ -41,7 +62,7 @@ export default function LifestyleSection() {
             transition={{ duration: 0.8 }}
             className="rounded-2xl overflow-hidden"
           >
-            <img src="/images/performance.png" alt="NitricX performance" className="w-full h-auto object-contain" />
+            <img src="/images/performance.png" alt={t.imageAlt} className="w-full h-auto object-contain" />
           </motion.div>
         </div>
       </div>

@@ -1,8 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+
+const content = {
+  en: {
+    imageAlt: "NitricX athlete performance",
+    eyebrow: "Performance Science",
+    titleA: "Your body.",
+    titleB: "Unleashed.",
+    body: "NitricX works at the cellular level, elevating nitric oxide production, improving oxygen delivery, and priming your muscles for peak output. No synthetic stimulants. No shortcuts.",
+    stats: [
+      { value: "40%", label: "More Nitric Oxide*" },
+      { value: "0", label: "Synthetic Stimulants" },
+      { value: "S7®", label: "Clinically Researched" },
+    ],
+  },
+  es: {
+    imageAlt: "Rendimiento de atleta NitricX",
+    eyebrow: "Ciencia del Rendimiento",
+    titleA: "Tu cuerpo.",
+    titleB: "Liberado.",
+    body: "NitricX actúa a nivel celular, elevando la producción de óxido nítrico, mejorando el suministro de oxígeno y preparando tus músculos para el máximo rendimiento. Sin estimulantes sintéticos. Sin atajos.",
+    stats: [
+      { value: "40%", label: "Más Óxido Nítrico*" },
+      { value: "0", label: "Estimulantes Sintéticos" },
+      { value: "S7®", label: "Clínicamente Investigado" },
+    ],
+  },
+};
 
 export default function PerformanceHero() {
+  const t = content[useLocale()];
+
   return (
     <section className="relative min-h-[70vh] flex items-end pb-20 overflow-hidden pt-32">
       {/* Background */}
@@ -20,7 +50,7 @@ export default function PerformanceHero() {
           <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/60 to-transparent z-10" />
           <img
             src="/images/IMG_3188_edited.jpg"
-            alt="NitricX athlete performance"
+            alt={t.imageAlt}
             className="w-full h-full object-cover object-center opacity-50"
           />
         </div>
@@ -34,7 +64,7 @@ export default function PerformanceHero() {
           className="text-eyebrow flex items-center gap-3 mb-6"
         >
           <span className="w-8 h-px bg-crimson" />
-          Performance Science
+          {t.eyebrow}
         </motion.div>
 
         <motion.h1
@@ -43,8 +73,8 @@ export default function PerformanceHero() {
           transition={{ duration: 0.9, delay: 0.15, ease: [0.2, 0.8, 0.2, 1] }}
           className="text-display text-6xl md:text-8xl lg:text-[9vw] max-w-4xl"
         >
-          Your body.<br />
-          <span className="metallic">Unleashed.</span>
+          {t.titleA}<br />
+          <span className="metallic">{t.titleB}</span>
         </motion.h1>
 
         <motion.p
@@ -53,9 +83,7 @@ export default function PerformanceHero() {
           transition={{ duration: 0.8, delay: 0.35 }}
           className="mt-8 max-w-xl text-white/60 text-lg leading-relaxed"
         >
-          NitricX works at the cellular level, elevating nitric oxide production,
-          improving oxygen delivery, and priming your muscles for peak output.
-          No synthetic stimulants. No shortcuts.
+          {t.body}
         </motion.p>
 
         <motion.div
@@ -64,12 +92,8 @@ export default function PerformanceHero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-10 flex gap-10"
         >
-          {[
-            { value: "40%", label: "More Nitric Oxide*" },
-            { value: "0", label: "Synthetic Stimulants" },
-            { value: "S7®", label: "Clinically Researched" },
-          ].map((stat) => (
-            <div key={stat.label}>
+          {t.stats.map((stat) => (
+            <div key={stat.value}>
               <div className="text-4xl font-black tracking-tight text-white">{stat.value}</div>
               <div className="text-xs tracking-widest text-white/40 uppercase mt-1">{stat.label}</div>
             </div>

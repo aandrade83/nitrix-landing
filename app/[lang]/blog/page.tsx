@@ -2,25 +2,50 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import BlogHero from "@/components/pages/blog/BlogHero";
-import { posts, formatDate } from "@/lib/blog";
+import { getPosts, formatDate } from "@/lib/blog";
+import { languageAlternates, localizeHref, type Locale } from "@/lib/i18n/config";
+import { resolveLocale } from "@/lib/i18n/server";
 
-export const metadata: Metadata = {
-  title: "Blog — NitricX",
-  description:
-    "Science-backed deep dives into the ingredients, mechanisms, and research behind NitricX. Understand what you put in your body.",
-  openGraph: {
-    title: "NitricX Blog — Science. Performance. No Fluff.",
+const meta: Record<Locale, Metadata> = {
+  en: {
+    title: "Blog — NitricX",
     description:
-      "Deep dives into the ingredients, mechanisms, and research behind NitricX.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "NitricX Blog" }],
+      "Science-backed deep dives into the ingredients, mechanisms, and research behind NitricX. Understand what you put in your body.",
+    openGraph: {
+      title: "NitricX Blog — Science. Performance. No Fluff.",
+      description:
+        "Deep dives into the ingredients, mechanisms, and research behind NitricX.",
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "NitricX Blog" }],
+    },
+  },
+  es: {
+    title: "Blog — NitricX",
+    description:
+      "Análisis respaldados por la ciencia sobre los ingredientes, mecanismos e investigación detrás de NitricX. Entiende lo que pones en tu cuerpo.",
+    openGraph: {
+      title: "Blog NitricX — Ciencia. Rendimiento. Sin Relleno.",
+      description:
+        "Análisis a fondo de los ingredientes, mecanismos e investigación detrás de NitricX.",
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Blog NitricX" }],
+    },
   },
 };
 
-export default function BlogPage() {
+const readArticle: Record<Locale, string> = { en: "Read article", es: "Leer artículo" };
+
+export async function generateMetadata({ params }: PageProps<"/[lang]/blog">): Promise<Metadata> {
+  const lang = await resolveLocale(params);
+  return { ...meta[lang], alternates: { canonical: `/${lang}/blog`, ...languageAlternates("/blog") } };
+}
+
+export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
+  const lang = await resolveLocale(params);
+  const posts = getPosts(lang);
+
   return (
     <>
       <div className="noise" aria-hidden="true" />
-      <BlogHero />
+      <BlogHero lang={lang} />
 
       <section className="pb-32 px-6 lg:px-10">
         <div className="max-w-[1400px] mx-auto">
@@ -28,7 +53,7 @@ export default function BlogPage() {
             {posts.map((post) => (
               <Link
                 key={post.slug}
-                href={`/blog/${post.slug}`}
+                href={localizeHref(lang, `/blog/${post.slug}`)}
                 className="group block rounded-2xl overflow-hidden border border-white/8 bg-white/[0.02] hover:border-crimson/30 hover:bg-white/[0.04] transition-all duration-300"
               >
                 {/* Thumbnail */}
@@ -49,7 +74,7 @@ export default function BlogPage() {
                 {/* Content */}
                 <div className="p-6">
                   <div className="flex items-center gap-3 text-white/30 text-xs mb-3">
-                    <span>{formatDate(post.date)}</span>
+                    <span>{formatDate(post.date, lang)}</span>
                     <span aria-hidden="true">·</span>
                     <span>{post.readTime}</span>
                   </div>
@@ -60,7 +85,7 @@ export default function BlogPage() {
                     {post.excerpt}
                   </p>
                   <span className="inline-flex items-center gap-1.5 mt-5 text-crimson text-sm font-medium">
-                    Read article
+                    {readArticle[lang]}
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>

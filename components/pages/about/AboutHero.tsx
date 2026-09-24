@@ -1,9 +1,16 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+
+const content = {
+  en: { eyebrow: "Our Story", titleA: "Built on Experience.", titleB: "Proven by Results." },
+  es: { eyebrow: "Nuestra Historia", titleA: "Construida con Experiencia.", titleB: "Probada con Resultados." },
+};
 
 export default function AboutHero() {
   const lineRef = useRef<HTMLSpanElement>(null);
+  const t = content[useLocale()];
 
   useEffect(() => {
     const el = lineRef.current;
@@ -28,12 +35,12 @@ export default function AboutHero() {
 
       <div className="relative z-10 max-w-[1400px] mx-auto w-full">
         <p className="text-xs tracking-[0.3em] text-crimson uppercase mb-4 font-semibold">
-          Our Story
+          {t.eyebrow}
         </p>
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white leading-none">
-          Built on Experience.
+          {t.titleA}
           <br />
-          <span className="text-crimson">Proven by Results.</span>
+          <span className="text-crimson">{t.titleB}</span>
         </h1>
 
         {/* Animated underline */}

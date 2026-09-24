@@ -2,9 +2,34 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+
+const content = {
+  en: {
+    eyebrow: "Natural Performance Drink",
+    titleA: "FEEL",
+    titleB: "THE",
+    titleC: "FLOW.",
+    body: "A premium plant-powered formulation engineered for elite movement. Built around the S7® blend. No stimulants. No shortcuts. Pure flow.",
+    explore: "Explore Formula",
+    watch: "Watch Experience",
+    scroll: "Scroll",
+  },
+  es: {
+    eyebrow: "Bebida de Rendimiento Natural",
+    titleA: "SIENTE",
+    titleB: "EL",
+    titleC: "FLOW.",
+    body: "Una fórmula premium a base de plantas, diseñada para el movimiento de élite. Creada en torno al S7® blend. Sin estimulantes. Sin atajos. Flow puro.",
+    explore: "Explorar Fórmula",
+    watch: "Ver la Experiencia",
+    scroll: "Desliza",
+  },
+};
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const t = content[useLocale()];
 
   useEffect(() => {
     const v = videoRef.current;
@@ -71,7 +96,7 @@ export default function Hero() {
             className="text-eyebrow flex items-center gap-3 mb-8"
           >
             <span className="w-8 h-px bg-crimson" />
-            Natural Performance Drink
+            {t.eyebrow}
           </motion.div>
 
           <motion.h1
@@ -80,7 +105,7 @@ export default function Hero() {
             transition={{ duration: 1.1, delay: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
             className="text-display text-[14vw] md:text-[10vw] lg:text-[8.4vw]"
           >
-            FEEL <span className="metallic">THE</span> FLOW.
+            {t.titleA} <span className="metallic">{t.titleB}</span> {t.titleC}
           </motion.h1>
 
           <motion.p
@@ -89,8 +114,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.8 }}
             className="mt-8 max-w-xl text-white/70 text-base md:text-lg leading-relaxed"
           >
-            A premium plant-powered formulation engineered for elite movement.
-            Built around the S7® blend. No stimulants. No shortcuts. Pure flow.
+            {t.body}
           </motion.p>
 
           <motion.div
@@ -100,12 +124,12 @@ export default function Hero() {
             className="mt-10 flex flex-wrap items-center gap-4"
           >
             <a href="#formula" className="btn-primary">
-              Explore Formula
+              {t.explore}
               <Arrow />
             </a>
             <a href="#flow" className="btn-ghost">
               <PlayIcon />
-              Watch Experience
+              {t.watch}
             </a>
           </motion.div>
         </div>
@@ -113,7 +137,7 @@ export default function Hero() {
 
       {/* ── Scroll indicator ── */}
       <div className="absolute left-1/2 -translate-x-1/2 bottom-6 z-20 flex flex-col items-center gap-2">
-        <span className="text-[10px] tracking-[0.4em] text-white/50 uppercase">Scroll</span>
+        <span className="text-[10px] tracking-[0.4em] text-white/50 uppercase">{t.scroll}</span>
         <div className="w-[22px] h-[36px] rounded-full border border-white/30 relative overflow-hidden">
           <span className="absolute left-1/2 top-2 w-1 h-1 bg-white rounded-full animate-scrollDot" />
         </div>

@@ -2,20 +2,48 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
-const s7 = ["Green Coffee Bean", "Green Tea", "Turmeric", "Tart Cherry", "Blueberry", "Broccoli", "Kale"];
-
-const supporting = [
-  { k: "Magnesium Taurate", v: "1.12 g" },
-  { k: "Bluava® Agave", v: "33.17 g" },
-  { k: "Evaporated Coconut Water", v: "5.26 g" },
-  { k: "L-Malic Acid", v: "0.18 g" },
-  { k: "Citric Acid", v: "0.50 g" },
-  { k: "S7® Blend", v: "50 mg" },
-];
+const content = {
+  en: {
+    canAlt: "NitricX Black Cherry",
+    eyebrow: "The Formula",
+    titleA: "Plant-powered.",
+    titleB: "Performance-forward.",
+    body: "The S7® core, a clinically researched blend of seven plant-based ingredients, sits at the heart of NitricX. Supported by Magnesium Taurate, Bluava® agave, and evaporated coconut water for a clean, natural athletic profile.",
+    s7: ["Green Coffee Bean", "Green Tea", "Turmeric", "Tart Cherry", "Blueberry", "Broccoli", "Kale"],
+    supporting: [
+      { k: "Magnesium Taurate", v: "1.12 g" },
+      { k: "Bluava® Agave", v: "33.17 g" },
+      { k: "Evaporated Coconut Water", v: "5.26 g" },
+      { k: "L-Malic Acid", v: "0.18 g" },
+      { k: "Citric Acid", v: "0.50 g" },
+      { k: "S7® Blend", v: "50 mg" },
+    ],
+    legal: "S7® is a registered trademark of VDF FutureCeuticals, Inc. NitricX® and the X mark are trademarks of Palumbo Arosemena Holdings LLC.",
+  },
+  es: {
+    canAlt: "NitricX Cereza Negra",
+    eyebrow: "La Fórmula",
+    titleA: "Impulsada por plantas.",
+    titleB: "Enfocada en rendimiento.",
+    body: "El núcleo S7®, un blend clínicamente investigado de siete ingredientes vegetales, está en el corazón de NitricX. Complementado con Taurato de Magnesio, agave Bluava® y agua de coco evaporada para un perfil deportivo limpio y natural.",
+    s7: ["Grano de Café Verde", "Té Verde", "Cúrcuma", "Cereza Ácida", "Arándano", "Brócoli", "Kale"],
+    supporting: [
+      { k: "Taurato de Magnesio", v: "1.12 g" },
+      { k: "Agave Bluava®", v: "33.17 g" },
+      { k: "Agua de Coco Evaporada", v: "5.26 g" },
+      { k: "Ácido L-Málico", v: "0.18 g" },
+      { k: "Ácido Cítrico", v: "0.50 g" },
+      { k: "S7® Blend", v: "50 mg" },
+    ],
+    legal: "S7® es una marca registrada de VDF FutureCeuticals, Inc. NitricX® y la marca X son marcas comerciales de Palumbo Arosemena Holdings LLC.",
+  },
+};
 
 export default function FormulaSection() {
   const ref = useRef<HTMLElement>(null);
+  const t = content[useLocale()];
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const yCan = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
   const rotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
@@ -31,7 +59,7 @@ export default function FormulaSection() {
         {/* Can visual */}
         <motion.div style={{ y: yCan, rotate }} className="lg:col-span-5 flex justify-center relative">
           <div className="relative can-shadow animate-floatY">
-            <img src="/images/black.png" alt="NitricX Black Cherry" className="w-[260px] md:w-[320px] object-contain" />
+            <img src="/images/black.png" alt={t.canAlt} className="w-[260px] md:w-[320px] object-contain" />
             <div className="absolute -inset-10 rounded-full bg-crimson/20 blur-3xl -z-10 animate-glowPulse" />
           </div>
         </motion.div>
@@ -40,24 +68,21 @@ export default function FormulaSection() {
         <div className="lg:col-span-7">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.9 }}>
             <div className="text-eyebrow mb-5 flex items-center gap-3">
-              <span className="w-8 h-px bg-crimson" /> The Formula
+              <span className="w-8 h-px bg-crimson" /> {t.eyebrow}
             </div>
             <h2 className="text-display text-5xl md:text-7xl">
-              Plant-powered.<br />
-              <span className="metallic">Performance-forward.</span>
+              {t.titleA}<br />
+              <span className="metallic">{t.titleB}</span>
             </h2>
             <p className="mt-6 text-white/60 max-w-xl leading-relaxed">
-              The S7® core, a clinically researched blend of seven plant-based
-              ingredients, sits at the heart of NitricX. Supported by Magnesium
-              Taurate, Bluava® agave, and evaporated coconut water for a clean,
-              natural athletic profile.
+              {t.body}
             </p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8, delay: 0.2 }} className="mt-10">
             <div className="text-[11px] tracking-[0.4em] text-crimson uppercase mb-4">S7® Blend</div>
             <div className="flex flex-wrap gap-2">
-              {s7.map((s, i) => (
+              {t.s7.map((s, i) => (
                 <motion.span
                   key={s}
                   initial={{ opacity: 0, y: 10 }}
@@ -73,7 +98,7 @@ export default function FormulaSection() {
           </motion.div>
 
           <div className="mt-12 grid grid-cols-2 gap-x-10 gap-y-5">
-            {supporting.map((row, i) => (
+            {t.supporting.map((row, i) => (
               <motion.div
                 key={row.k}
                 initial={{ opacity: 0, x: -10 }}
@@ -89,7 +114,7 @@ export default function FormulaSection() {
           </div>
 
           <p className="mt-10 text-xs text-white/35 max-w-md leading-relaxed">
-            S7® is a registered trademark of VDF FutureCeuticals, Inc. NitricX® and the X mark are trademarks of Palumbo Arosemena Holdings LLC.
+            {t.legal}
           </p>
         </div>
       </div>

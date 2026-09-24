@@ -4,8 +4,41 @@ import { useState } from "react";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 import SectionReveal from "@/components/ui/SectionReveal";
 import Button from "@/components/ui/Button";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+
+const content = {
+  en: {
+    eyebrow: "Early Access",
+    titleA: "Be First.",
+    titleB: "Train First.",
+    body: "Join the NitricX waitlist and get exclusive early-bird pricing, launch-day access, and a behind-the-scenes look at the science.",
+    successTitle: "You're on the list.",
+    successBody: "We'll notify you the moment NitricX is available.",
+    formLabel: "Join the waitlist",
+    emailLabel: "Email address",
+    placeholder: "your@email.com",
+    joining: "Joining…",
+    join: "Join Waitlist",
+    noSpam: "No spam. Unsubscribe anytime.",
+  },
+  es: {
+    eyebrow: "Acceso Anticipado",
+    titleA: "Sé el Primero.",
+    titleB: "Entrena Primero.",
+    body: "Únete a la lista de espera de NitricX y obtén precios exclusivos de lanzamiento, acceso el día del lanzamiento y una mirada detrás de escena a la ciencia.",
+    successTitle: "Ya estás en la lista.",
+    successBody: "Te avisaremos en cuanto NitricX esté disponible.",
+    formLabel: "Unirse a la lista de espera",
+    emailLabel: "Correo electrónico",
+    placeholder: "tu@correo.com",
+    joining: "Uniéndote…",
+    join: "Unirme",
+    noSpam: "Sin spam. Cancela cuando quieras.",
+  },
+};
 
 export default function Waitlist() {
+  const t = content[useLocale()];
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -35,16 +68,15 @@ export default function Waitlist() {
       <div className="relative z-10 max-w-2xl mx-auto px-6 text-center">
         <SectionReveal>
           <EyebrowLabel color="crimson" withLine className="mb-6 justify-center">
-            Early Access
+            {t.eyebrow}
           </EyebrowLabel>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground mb-4">
-            Be First.
+            {t.titleA}
             <br />
-            <span className="text-crimson">Train First.</span>
+            <span className="text-crimson">{t.titleB}</span>
           </h2>
           <p className="text-zinc-400 text-lg leading-relaxed mb-10">
-            Join the NitricX waitlist and get exclusive early-bird pricing,
-            launch-day access, and a behind-the-scenes look at the science.
+            {t.body}
           </p>
         </SectionReveal>
 
@@ -53,27 +85,27 @@ export default function Waitlist() {
             <div className="flex flex-col items-center gap-3 py-6">
               <span className="text-crimson text-4xl" aria-hidden="true">✓</span>
               <p className="text-foreground font-semibold text-lg">
-                You&apos;re on the list.
+                {t.successTitle}
               </p>
               <p className="text-zinc-500 text-sm">
-                We&apos;ll notify you the moment NitricX is available.
+                {t.successBody}
               </p>
             </div>
           ) : (
             <form
               onSubmit={handleSubmit}
               className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-              aria-label="Join the waitlist"
+              aria-label={t.formLabel}
             >
               <label htmlFor="waitlist-email" className="sr-only">
-                Email address
+                {t.emailLabel}
               </label>
               <input
                 id="waitlist-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
+                placeholder={t.placeholder}
                 required
                 className="flex-1 px-5 py-3 rounded-full bg-white/5 border border-white/10 text-foreground placeholder:text-zinc-600 text-sm focus:outline-none focus:border-crimson/50 focus:ring-1 focus:ring-crimson/30 transition-all duration-200"
               />
@@ -82,12 +114,12 @@ export default function Waitlist() {
                 size="md"
                 disabled={status === "loading"}
               >
-                {status === "loading" ? "Joining…" : "Join Waitlist"}
+                {status === "loading" ? t.joining : t.join}
               </Button>
             </form>
           )}
           <p className="text-zinc-700 text-xs tracking-wide mt-4">
-            No spam. Unsubscribe anytime.
+            {t.noSpam}
           </p>
         </SectionReveal>
       </div>

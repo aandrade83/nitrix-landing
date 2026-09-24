@@ -1,8 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+
+const content = {
+  en: {
+    eyebrow: "Full Label Transparency",
+    titleA: "Nothing hidden.",
+    titleB: "Everything declared.",
+    body: "NitricX contains 13 carefully selected ingredients, each chosen for a specific, documented purpose. No fillers. No proprietary blend cover-ups. Every dose shown exactly as it is.",
+  },
+  es: {
+    eyebrow: "Transparencia Total en la Etiqueta",
+    titleA: "Nada oculto.",
+    titleB: "Todo declarado.",
+    body: "NitricX contiene 13 ingredientes cuidadosamente seleccionados, cada uno elegido con un propósito específico y documentado. Sin rellenos. Sin mezclas patentadas que oculten nada. Cada dosis mostrada tal como es.",
+  },
+};
 
 export default function IngredientsHero() {
+  const t = content[useLocale()];
+
   return (
     <section className="relative min-h-[60vh] flex items-end pb-20 pt-36 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -18,7 +36,7 @@ export default function IngredientsHero() {
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 w-full">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-eyebrow flex items-center gap-3 mb-6">
-          <span className="w-8 h-px bg-crimson" /> Full Label Transparency
+          <span className="w-8 h-px bg-crimson" /> {t.eyebrow}
         </motion.div>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -26,8 +44,8 @@ export default function IngredientsHero() {
           transition={{ duration: 0.9, delay: 0.15, ease: [0.2, 0.8, 0.2, 1] }}
           className="text-display text-6xl md:text-8xl lg:text-[9vw] max-w-4xl"
         >
-          Nothing hidden.<br />
-          <span className="metallic">Everything declared.</span>
+          {t.titleA}<br />
+          <span className="metallic">{t.titleB}</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -35,8 +53,7 @@ export default function IngredientsHero() {
           transition={{ duration: 0.8, delay: 0.35 }}
           className="mt-8 max-w-xl text-white/60 text-lg leading-relaxed"
         >
-          NitricX contains 13 carefully selected ingredients, each chosen for a specific, documented purpose. No fillers. No proprietary blend cover-ups.
-          Every dose shown exactly as it is.
+          {t.body}
         </motion.p>
       </div>
     </section>

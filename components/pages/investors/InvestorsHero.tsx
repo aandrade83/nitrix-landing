@@ -1,8 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
+
+const content = {
+  en: {
+    eyebrow: "Investor Relations",
+    titleA: "The next category",
+    titleB: "leader is here.",
+    body: "NitricX enters a $24 billion global energy drink market with a clinically differentiated, plant-powered formula, a trademarked brand, and a full retail distribution pipeline already in development.",
+    stats: [
+      { value: "$24B", label: "Global Market Size" },
+      { value: "10+", label: "Target Retail Chains" },
+      { value: "USPTO", label: "Registered Trademark" },
+      { value: "S7®", label: "Patented Core Ingredient" },
+    ],
+  },
+  es: {
+    eyebrow: "Relación con Inversionistas",
+    titleA: "El próximo líder",
+    titleB: "de la categoría ya está aquí.",
+    body: "NitricX entra a un mercado global de bebidas energéticas de $24 mil millones con una fórmula a base de plantas clínicamente diferenciada, una marca registrada y una red completa de distribución minorista ya en desarrollo.",
+    stats: [
+      { value: "$24B", label: "Tamaño del Mercado Global" },
+      { value: "10+", label: "Cadenas Minoristas Objetivo" },
+      { value: "USPTO", label: "Marca Registrada" },
+      { value: "S7®", label: "Ingrediente Central Patentado" },
+    ],
+  },
+};
 
 export default function InvestorsHero() {
+  const t = content[useLocale()];
+
   return (
     <section className="relative min-h-[75vh] flex items-end pb-20 pt-36 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -19,7 +49,7 @@ export default function InvestorsHero() {
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 w-full">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-eyebrow flex items-center gap-3 mb-6">
-          <span className="w-8 h-px bg-crimson" /> Investor Relations
+          <span className="w-8 h-px bg-crimson" /> {t.eyebrow}
         </motion.div>
 
         <motion.h1
@@ -28,8 +58,8 @@ export default function InvestorsHero() {
           transition={{ duration: 0.9, delay: 0.15, ease: [0.2, 0.8, 0.2, 1] }}
           className="text-display text-6xl md:text-8xl lg:text-[8vw] max-w-5xl"
         >
-          The next category<br />
-          <span className="metallic">leader is here.</span>
+          {t.titleA}<br />
+          <span className="metallic">{t.titleB}</span>
         </motion.h1>
 
         <motion.p
@@ -38,7 +68,7 @@ export default function InvestorsHero() {
           transition={{ duration: 0.8, delay: 0.35 }}
           className="mt-8 max-w-2xl text-white/60 text-lg leading-relaxed"
         >
-          NitricX enters a $24 billion global energy drink market with a clinically differentiated, plant-powered formula, a trademarked brand, and a full retail distribution pipeline already in development.
+          {t.body}
         </motion.p>
 
         <motion.div
@@ -47,13 +77,8 @@ export default function InvestorsHero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8"
         >
-          {[
-            { value: "$24B", label: "Global Market Size" },
-            { value: "10+", label: "Target Retail Chains" },
-            { value: "USPTO", label: "Registered Trademark" },
-            { value: "S7®", label: "Patented Core Ingredient" },
-          ].map((stat) => (
-            <div key={stat.label} className="border-l border-white/10 pl-6">
+          {t.stats.map((stat) => (
+            <div key={stat.value} className="border-l border-white/10 pl-6">
               <div className="text-3xl md:text-4xl font-black tracking-tight text-white">{stat.value}</div>
               <div className="text-xs tracking-widest text-white/40 uppercase mt-1">{stat.label}</div>
             </div>

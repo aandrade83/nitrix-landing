@@ -1,49 +1,90 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
-const partners = [
-  {
-    name: "Power Brands",
-    role: "Production & Commercialization",
-    detail: "Van Nuys, CA. Beverage specialists with 200+ brand launches and established retail relationships with every major US chain.",
+const content = {
+  en: {
+    eyebrow: "Strategic Partners",
+    titleA: "Built with the",
+    titleB: "best in the business.",
+    pipeline: "Retail Distribution Pipeline",
+    pipelineBody: "Power Brands has established commercial relationships with the following retail chains. NitricX is positioned for placement across all of them upon launch.",
+    partners: [
+      {
+        name: "Power Brands",
+        role: "Production & Commercialization",
+        detail: "Van Nuys, CA. Beverage specialists with 200+ brand launches and established retail relationships with every major US chain.",
+      },
+      {
+        name: "Flavorman",
+        role: "Formulation & R&D",
+        detail: "Louisville, KY. Award-winning beverage R&D company with over 30 years of expertise in functional drink formulation.",
+      },
+      {
+        name: "VDF FutureCeuticals",
+        role: "S7® Ingredient Partner",
+        detail: "Proprietary holder of the S7® patent. Exclusive licensing agreement for NitricX ensures a protected, defensible competitive moat.",
+      },
+      {
+        name: "Republic Bank",
+        role: "Financial Partner",
+        detail: "Banking and financing relationship established to support initial production and early commercial operations.",
+      },
+    ],
   },
-  {
-    name: "Flavorman",
-    role: "Formulation & R&D",
-    detail: "Louisville, KY. Award-winning beverage R&D company with over 30 years of expertise in functional drink formulation.",
+  es: {
+    eyebrow: "Socios Estratégicos",
+    titleA: "Construida con los",
+    titleB: "mejores del sector.",
+    pipeline: "Red de Distribución Minorista",
+    pipelineBody: "Power Brands tiene relaciones comerciales establecidas con las siguientes cadenas minoristas. NitricX está posicionada para estar presente en todas ellas desde el lanzamiento.",
+    partners: [
+      {
+        name: "Power Brands",
+        role: "Producción y Comercialización",
+        detail: "Van Nuys, CA. Especialistas en bebidas con más de 200 lanzamientos de marca y relaciones establecidas con todas las grandes cadenas minoristas de EE. UU.",
+      },
+      {
+        name: "Flavorman",
+        role: "Formulación e I+D",
+        detail: "Louisville, KY. Empresa de I+D de bebidas galardonada, con más de 30 años de experiencia en la formulación de bebidas funcionales.",
+      },
+      {
+        name: "VDF FutureCeuticals",
+        role: "Socio del Ingrediente S7®",
+        detail: "Titular de la patente S7®. El acuerdo de licencia exclusiva para NitricX garantiza una ventaja competitiva protegida y defendible.",
+      },
+      {
+        name: "Republic Bank",
+        role: "Socio Financiero",
+        detail: "Relación bancaria y de financiamiento establecida para respaldar la producción inicial y las primeras operaciones comerciales.",
+      },
+    ],
   },
-  {
-    name: "VDF FutureCeuticals",
-    role: "S7® Ingredient Partner",
-    detail: "Proprietary holder of the S7® patent. Exclusive licensing agreement for NitricX ensures a protected, defensible competitive moat.",
-  },
-  {
-    name: "Republic Bank",
-    role: "Financial Partner",
-    detail: "Banking and financing relationship established to support initial production and early commercial operations.",
-  },
-];
+};
 
 const retailers = ["WALMART", "COSTCO", "WHOLE FOODS", "TRADER JOE'S", "ALBERTSONS", "SAFEWAY", "WALGREENS", "7-ELEVEN", "TESCO", "AMPM"];
 
 export default function PartnersSection() {
+  const t = content[useLocale()];
+
   return (
     <section className="py-24 lg:py-32 bg-ink-soft border-t border-white/5">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         {/* Partners */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mb-12">
           <div className="text-eyebrow flex items-center gap-3 mb-5">
-            <span className="w-8 h-px bg-crimson" /> Strategic Partners
+            <span className="w-8 h-px bg-crimson" /> {t.eyebrow}
           </div>
           <h2 className="text-display text-5xl md:text-6xl">
-            Built with the<br />
-            <span className="metallic">best in the business.</span>
+            {t.titleA}<br />
+            <span className="metallic">{t.titleB}</span>
           </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-20">
-          {partners.map((p, i) => (
+          {t.partners.map((p, i) => (
             <motion.div
               key={p.name}
               initial={{ opacity: 0, y: 20 }}
@@ -62,10 +103,10 @@ export default function PartnersSection() {
         {/* Retail pipeline */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mb-8">
           <div className="text-eyebrow flex items-center gap-3 mb-5">
-            <span className="w-8 h-px bg-crimson" /> Retail Distribution Pipeline
+            <span className="w-8 h-px bg-crimson" /> {t.pipeline}
           </div>
           <p className="text-white/50 text-sm max-w-xl">
-            Power Brands has established commercial relationships with the following retail chains. NitricX is positioned for placement across all of them upon launch.
+            {t.pipelineBody}
           </p>
         </motion.div>
 

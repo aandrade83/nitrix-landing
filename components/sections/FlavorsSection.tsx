@@ -1,35 +1,46 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 const flavors = [
-  {
-    name: "Coconut",
-    note: "Tropical · Smooth",
-    glow: "rgba(255,255,255,0.35)",
-    image: "/images/coco.png",
-  },
-  {
-    name: "Blue Raspberry",
-    note: "Sharp · Electric",
-    glow: "rgba(40,80,255,0.45)",
-    image: "/images/blue.png",
-  },
-  {
-    name: "Black Cherry",
-    note: "Deep · Bold",
-    glow: "rgba(225,10,30,0.55)",
-    image: "/images/black.png",
-  },
-  {
-    name: "Grape",
-    note: "Rich · Modern",
-    glow: "rgba(140,40,220,0.45)",
-    image: "/images/grape.png",
-  },
+  { glow: "rgba(255,255,255,0.35)", image: "/images/coco.png" },
+  { glow: "rgba(40,80,255,0.45)", image: "/images/blue.png" },
+  { glow: "rgba(225,10,30,0.55)", image: "/images/black.png" },
+  { glow: "rgba(140,40,220,0.45)", image: "/images/grape.png" },
 ];
 
+const content = {
+  en: {
+    eyebrow: "Four Flavors. One Standard.",
+    titleA: "The",
+    titleB: "collection.",
+    body: "Crafted with evaporated coconut water, Bluava® agave, and the S7® plant blend. 12 oz slim cans. Carbonated. Premium athletic formulation.",
+    flavors: [
+      { name: "Coconut", note: "Tropical · Smooth" },
+      { name: "Blue Raspberry", note: "Sharp · Electric" },
+      { name: "Black Cherry", note: "Deep · Bold" },
+      { name: "Grape", note: "Rich · Modern" },
+    ],
+  },
+  es: {
+    eyebrow: "Cuatro Sabores. Un Estándar.",
+    titleA: "La",
+    titleB: "colección.",
+    body: "Elaborada con agua de coco evaporada, agave Bluava® y el blend vegetal S7®. Latas slim de 12 oz. Carbonatada. Fórmula deportiva premium.",
+    flavors: [
+      { name: "Coco", note: "Tropical · Suave" },
+      { name: "Frambuesa Azul", note: "Intensa · Eléctrica" },
+      { name: "Cereza Negra", note: "Profunda · Audaz" },
+      { name: "Uva", note: "Rica · Moderna" },
+    ],
+  },
+};
+
 export default function FlavorsSection() {
+  const t = content[useLocale()];
+  const items = flavors.map((f, i) => ({ ...f, ...t.flavors[i] }));
+
   return (
     <section id="flavors" className="relative py-32 lg:py-44 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -40,22 +51,21 @@ export default function FlavorsSection() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div>
             <div className="text-eyebrow mb-5 flex items-center gap-3">
-              <span className="w-8 h-px bg-crimson" /> Four Flavors. One Standard.
+              <span className="w-8 h-px bg-crimson" /> {t.eyebrow}
             </div>
             <h2 className="text-display text-5xl md:text-7xl">
-              The <span className="metallic">collection.</span>
+              {t.titleA} <span className="metallic">{t.titleB}</span>
             </h2>
           </div>
           <p className="max-w-md text-white/55 leading-relaxed">
-            Crafted with evaporated coconut water, Bluava® agave, and the S7® plant
-            blend. 12 oz slim cans. Carbonated. Premium athletic formulation.
+            {t.body}
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {flavors.map((f, i) => (
+          {items.map((f, i) => (
             <motion.div
-              key={f.name}
+              key={f.image}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}

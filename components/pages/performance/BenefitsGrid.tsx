@@ -1,47 +1,102 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
-const benefits = [
-  {
-    icon: "⚡",
-    title: "Clean Energy Surge",
-    body: "Green Coffee Bean and Green Tea deliver a smooth, sustained energy boost with no adrenal crash and no jitter. Just clean, focused power from the first sip.",
-    metric: "~150 mg natural caffeine per serving",
+const content = {
+  en: {
+    eyebrow: "Benefits",
+    titleA: "Six ways NitricX",
+    titleB: "changes the game.",
+    footnote: "*Compared to placebo in a peer-reviewed, double-blind clinical study on the S7® Blend. Individual results may vary.",
+    benefits: [
+      {
+        icon: "⚡",
+        title: "Clean Energy Surge",
+        body: "Green Coffee Bean and Green Tea deliver a smooth, sustained energy boost with no adrenal crash and no jitter. Just clean, focused power from the first sip.",
+        metric: "~150 mg natural caffeine per serving",
+      },
+      {
+        icon: "🫀",
+        title: "Superior Blood Flow",
+        body: "Beet Root and the full S7® blend drive a clinically documented 40% increase in nitric oxide output, expanding blood vessels for massive muscle pump and oxygen delivery.",
+        metric: "+40% Nitric Oxide vs. placebo*",
+      },
+      {
+        icon: "🔥",
+        title: "Accelerated Recovery",
+        body: "Tart Cherry and Turmeric combat exercise-induced inflammation at the source. Less soreness. Faster adaptation. Train again sooner.",
+        metric: "Anti-inflammatory antioxidant stack",
+      },
+      {
+        icon: "🧠",
+        title: "Cognitive Focus",
+        body: "Blueberry Extract enhances cerebral blood flow and reduces oxidative stress under load, keeping your mind as sharp as your muscles are primed.",
+        metric: "Anthocyanin-rich cognitive support",
+      },
+      {
+        icon: "🌿",
+        title: "Cellular Defense",
+        body: "Kale and Broccoli Sprout provide dense micronutrients and sulforaphane, activating your body's own antioxidant defenses at a genetic level.",
+        metric: "Nrf2 pathway activation",
+      },
+      {
+        icon: "✓",
+        title: "Zero Synthetic Fillers",
+        body: "Full label transparency. Every ingredient is declared with its exact dose. No proprietary blends masking underdosed actives. What you see is what you get.",
+        metric: "100% label transparency",
+      },
+    ],
   },
-  {
-    icon: "🫀",
-    title: "Superior Blood Flow",
-    body: "Beet Root and the full S7® blend drive a clinically documented 40% increase in nitric oxide output, expanding blood vessels for massive muscle pump and oxygen delivery.",
-    metric: "+40% Nitric Oxide vs. placebo*",
+  es: {
+    eyebrow: "Beneficios",
+    titleA: "Seis formas en que NitricX",
+    titleB: "cambia el juego.",
+    footnote: "*En comparación con placebo en un estudio clínico doble ciego y revisado por pares sobre el S7® Blend. Los resultados individuales pueden variar.",
+    benefits: [
+      {
+        icon: "⚡",
+        title: "Energía Limpia",
+        body: "El Grano de Café Verde y el Té Verde aportan un impulso de energía suave y sostenido, sin bajón ni nerviosismo. Solo potencia limpia y enfocada desde el primer sorbo.",
+        metric: "~150 mg de cafeína natural por porción",
+      },
+      {
+        icon: "🫀",
+        title: "Flujo Sanguíneo Superior",
+        body: "La Raíz de Remolacha y el S7® blend completo generan un aumento clínicamente documentado del 40% en la producción de óxido nítrico, dilatando los vasos sanguíneos para un mayor bombeo muscular y suministro de oxígeno.",
+        metric: "+40% Óxido Nítrico vs. placebo*",
+      },
+      {
+        icon: "🔥",
+        title: "Recuperación Acelerada",
+        body: "La Cereza Ácida y la Cúrcuma combaten la inflamación causada por el ejercicio desde su origen. Menos dolor. Adaptación más rápida. Vuelve a entrenar antes.",
+        metric: "Stack antioxidante antiinflamatorio",
+      },
+      {
+        icon: "🧠",
+        title: "Enfoque Cognitivo",
+        body: "El Extracto de Arándano mejora el flujo sanguíneo cerebral y reduce el estrés oxidativo bajo exigencia, manteniendo tu mente tan aguda como tus músculos preparados.",
+        metric: "Soporte cognitivo rico en antocianinas",
+      },
+      {
+        icon: "🌿",
+        title: "Defensa Celular",
+        body: "El Kale y el Brote de Brócoli aportan micronutrientes densos y sulforafano, activando las defensas antioxidantes propias de tu cuerpo a nivel genético.",
+        metric: "Activación de la vía Nrf2",
+      },
+      {
+        icon: "✓",
+        title: "Cero Rellenos Sintéticos",
+        body: "Transparencia total en la etiqueta. Cada ingrediente se declara con su dosis exacta. Sin mezclas patentadas que oculten activos subdosificados. Lo que ves es lo que obtienes.",
+        metric: "100% transparencia en la etiqueta",
+      },
+    ],
   },
-  {
-    icon: "🔥",
-    title: "Accelerated Recovery",
-    body: "Tart Cherry and Turmeric combat exercise-induced inflammation at the source. Less soreness. Faster adaptation. Train again sooner.",
-    metric: "Anti-inflammatory antioxidant stack",
-  },
-  {
-    icon: "🧠",
-    title: "Cognitive Focus",
-    body: "Blueberry Extract enhances cerebral blood flow and reduces oxidative stress under load, keeping your mind as sharp as your muscles are primed.",
-    metric: "Anthocyanin-rich cognitive support",
-  },
-  {
-    icon: "🌿",
-    title: "Cellular Defense",
-    body: "Kale and Broccoli Sprout provide dense micronutrients and sulforaphane, activating your body's own antioxidant defenses at a genetic level.",
-    metric: "Nrf2 pathway activation",
-  },
-  {
-    icon: "✓",
-    title: "Zero Synthetic Fillers",
-    body: "Full label transparency. Every ingredient is declared with its exact dose. No proprietary blends masking underdosed actives. What you see is what you get.",
-    metric: "100% label transparency",
-  },
-];
+};
 
 export default function BenefitsGrid() {
+  const t = content[useLocale()];
+
   return (
     <section className="py-24 lg:py-32 border-t border-white/5">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -53,18 +108,18 @@ export default function BenefitsGrid() {
           className="mb-16"
         >
           <div className="text-eyebrow flex items-center gap-3 mb-5">
-            <span className="w-8 h-px bg-crimson" /> Benefits
+            <span className="w-8 h-px bg-crimson" /> {t.eyebrow}
           </div>
           <h2 className="text-display text-5xl md:text-7xl">
-            Six ways NitricX<br />
-            <span className="metallic">changes the game.</span>
+            {t.titleA}<br />
+            <span className="metallic">{t.titleB}</span>
           </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {benefits.map((b, i) => (
+          {t.benefits.map((b, i) => (
             <motion.article
-              key={b.title}
+              key={b.icon}
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -82,7 +137,7 @@ export default function BenefitsGrid() {
         </div>
 
         <p className="mt-10 text-xs text-white/30 leading-relaxed max-w-xl">
-          *Compared to placebo in a peer-reviewed, double-blind clinical study on the S7® Blend. Individual results may vary.
+          {t.footnote}
         </p>
       </div>
     </section>
