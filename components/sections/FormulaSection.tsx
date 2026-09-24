@@ -2,11 +2,12 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 
 const content = {
   en: {
-    canAlt: "NitricX Black Cherry",
+    plantsAlt: "The seven S7® plant ingredients: green coffee bean, green tea, turmeric, tart cherry, blueberry, broccoli and kale",
     eyebrow: "The Formula",
     titleA: "Plant-powered.",
     titleB: "Performance-forward.",
@@ -23,7 +24,7 @@ const content = {
     legal: "S7® is a registered trademark of VDF FutureCeuticals, Inc. NitricX® and the X mark are trademarks of Palumbo Arosemena Holdings LLC.",
   },
   es: {
-    canAlt: "NitricX Cereza Negra",
+    plantsAlt: "Los siete ingredientes vegetales del S7®: grano de café verde, té verde, cúrcuma, cereza ácida, arándano, brócoli y kale",
     eyebrow: "La Fórmula",
     titleA: "Impulsada por plantas.",
     titleB: "Enfocada en rendimiento.",
@@ -49,17 +50,24 @@ export default function FormulaSection() {
   const rotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
 
   return (
-    <section id="formula" ref={ref} className="relative py-32 lg:py-48 overflow-hidden">
+    <section id="formula" ref={ref} className="relative py-20 md:py-32 lg:py-48 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full bg-crimson/15 blur-[140px]" />
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-white/[0.04] blur-[120px]" />
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative">
-        {/* Can visual */}
+        {/* S7® plants visual */}
         <motion.div style={{ y: yCan, rotate }} className="lg:col-span-5 flex justify-center relative">
           <div className="relative can-shadow animate-floatY">
-            <img src="/images/black.png" alt={t.canAlt} className="w-[260px] md:w-[320px] object-contain" />
+            <Image
+              src="/images/plants.png"
+              alt={t.plantsAlt}
+              width={1187}
+              height={1325}
+              sizes="(max-width: 768px) 340px, 480px"
+              className="w-[300px] md:w-[420px] lg:w-[480px] h-auto object-contain"
+            />
             <div className="absolute -inset-10 rounded-full bg-crimson/20 blur-3xl -z-10 animate-glowPulse" />
           </div>
         </motion.div>
@@ -97,7 +105,7 @@ export default function FormulaSection() {
             </div>
           </motion.div>
 
-          <div className="mt-12 grid grid-cols-2 gap-x-10 gap-y-5">
+          <div className="mt-12 grid grid-cols-2 gap-x-6 md:gap-x-10 gap-y-5">
             {t.supporting.map((row, i) => (
               <motion.div
                 key={row.k}
@@ -108,7 +116,7 @@ export default function FormulaSection() {
                 className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-3"
               >
                 <span className="text-sm text-white/65">{row.k}</span>
-                <span className="font-semibold tracking-tight text-sm">{row.v}</span>
+                <span className="font-semibold tracking-tight text-sm whitespace-nowrap">{row.v}</span>
               </motion.div>
             ))}
           </div>

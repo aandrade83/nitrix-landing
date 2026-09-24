@@ -3,6 +3,7 @@ import IngredientsHero from "@/components/pages/ingredients/IngredientsHero";
 import S7BlendSection from "@/components/pages/ingredients/S7BlendSection";
 import SupportingIngredients from "@/components/pages/ingredients/SupportingIngredients";
 import TransparencySection from "@/components/pages/ingredients/TransparencySection";
+import FlavorsSection from "@/components/sections/FlavorsSection";
 import { languageAlternates, type Locale } from "@/lib/i18n/config";
 import { resolveLocale } from "@/lib/i18n/server";
 
@@ -42,6 +43,7 @@ export default function IngredientsPage() {
       <div className="noise" aria-hidden="true" />
       <IngredientsHero />
       <S7BlendSection />
+      <FlavorsSection />
       <SupportingIngredients />
       <TransparencySection />
     </>

@@ -155,7 +155,7 @@ function PhaseIcon({ index }: { index: number }) {
               alt=""
               width={128}
               height={128}
-              loading="lazy"
+              loading="eager"
               draggable={false}
               className={`${icon.treatment} w-16 h-16 md:w-28 md:h-28 lg:w-32 lg:h-32 select-none`}
             />
@@ -179,7 +179,7 @@ export default function FlowSection() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section id="flow" ref={ref} className="relative py-32 lg:py-48 overflow-hidden">
+      <section id="flow" ref={ref} className="relative py-20 md:py-32 lg:py-48 overflow-hidden">
         <motion.div style={{ y }} className="absolute inset-0 pointer-events-none" aria-hidden>
           <div className="absolute top-1/4 left-0 right-0 h-px flow-line opacity-40" />
           <div className="absolute top-1/2 left-0 right-0 h-px flow-line opacity-25" />
@@ -222,7 +222,7 @@ export default function FlowSection() {
                     key={p.n}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.45 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-32 items-center"
                   >
                     {/* Node on the line */}

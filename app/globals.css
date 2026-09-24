@@ -261,6 +261,25 @@ body {
     drop-shadow(0 0 26px rgba(225, 10, 30, 0.55));
 }
 
+/* ─── Flavor scroll ─── */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.animate-spinSlow { animation: spinSlow 60s linear infinite; }
+
+/* Short bright dash travelling along the orbit arc */
+@keyframes ringDash {
+  from { stroke-dashoffset: 520; }
+  to   { stroke-dashoffset: 0; }
+}
+.animate-ringDash {
+  stroke-dasharray: 70 450;
+  animation: ringDash 3.2s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-floatSoft { animation: none; }
+  .animate-floatSoft,
+  .animate-spinSlow,
+  .animate-ringDash { animation: none; }
 }

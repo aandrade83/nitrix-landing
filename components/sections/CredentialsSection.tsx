@@ -44,7 +44,7 @@ export default function CredentialsSection() {
   const t = content[useLocale()];
 
   return (
-    <section id="credentials" className="relative py-32 lg:py-44 overflow-hidden">
+    <section id="credentials" className="relative py-20 md:py-32 lg:py-44 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-crimson/[0.06] blur-[140px]" />
       </div>

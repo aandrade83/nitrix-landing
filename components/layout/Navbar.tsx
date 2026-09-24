@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import {
   localeNames,
@@ -54,11 +55,15 @@ function LanguageSwitcher({
   lang,
   label,
   className = "",
+  linkClassName = "",
+  onNavigate,
 }: {
   pathname: string;
   lang: Locale;
   label: string;
   className?: string;
+  linkClassName?: string;
+  onNavigate?: () => void;
 }) {
   return (
     <div role="group" aria-label={label} className={`flex items-center gap-2 font-semibold tracking-widest ${className}`}>
@@ -67,11 +72,14 @@ function LanguageSwitcher({
           {i > 0 && <span className="text-white/20" aria-hidden="true">/</span>}
           <Link
             href={switchLocalePath(pathname, l)}
-            onClick={() => rememberLocale(l)}
+            onClick={() => {
+              rememberLocale(l);
+              onNavigate?.();
+            }}
             hrefLang={l}
             aria-label={localeNames[l]}
             aria-current={l === lang ? "true" : undefined}
-            className={`uppercase transition-colors duration-200 ${
+            className={`uppercase transition-colors duration-200 ${linkClassName} ${
               l === lang ? "text-white" : "text-white/40 hover:text-white"
             }`}
           >
@@ -85,11 +93,16 @@ function LanguageSwitcher({
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  // The drawer is tied to the path it was opened on, so any navigation closes it
+  const [openOn, setOpenOn] = useState<string | null>(null);
+  const menuOpen = openOn === pathname;
+  const closeMenu = () => setOpenOn(null);
   const lang = useLocale();
   const t = content[lang];
   const navLinks = t.links.map((link) => ({ ...link, href: localizeHref(lang, link.href) }));
+  // Waitlist lives on the home page; a bare "#waitlist" did nothing on other pages
+  const waitlistHref = `${localizeHref(lang, "/")}#waitlist`;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -97,7 +110,20 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
+  // While the drawer is open: lock page scroll and close on Escape
+  useEffect(() => {
+    if (!menuOpen) return;
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenOn(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = overflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
 
   return (
     <>
@@ -130,7 +156,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-6">
             <LanguageSwitcher pathname={pathname} lang={lang} label={t.language} className="text-xs" />
             <Link
-              href="#waitlist"
+              href={waitlistHref}
               className="hidden lg:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-crimson text-white text-sm font-semibold tracking-wide whitespace-nowrap hover:bg-crimson-dark transition-colors duration-200"
             >
               {t.cta}
@@ -139,9 +165,12 @@ export default function Navbar() {
 
           {/* Mobile burger */}
           <button
-            className="md:hidden text-white/60 hover:text-white transition-colors p-2"
+            type="button"
+            className="md:hidden -mr-3 w-11 h-11 flex items-center justify-center text-white/70 hover:text-white transition-colors"
             aria-label={menuOpen ? t.closeMenu : t.openMenu}
-            onClick={() => setMenuOpen(!menuOpen)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setOpenOn(menuOpen ? null : pathname)}
           >
             {menuOpen ? (
               <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
@@ -159,26 +188,57 @@ export default function Navbar() {
       </header>
 
       {/* Mobile drawer */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-ink/95 backdrop-blur-lg flex flex-col items-center justify-center gap-10 md:hidden">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-3xl font-extrabold tracking-tight text-white hover:text-crimson transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="#waitlist"
-            className="mt-4 px-8 py-3 rounded-full bg-crimson text-white font-semibold tracking-wide hover:bg-crimson-dark transition-colors"
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            id="mobile-menu"
+            key="mobile-menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-ink/95 backdrop-blur-lg md:hidden overflow-y-auto overscroll-contain"
           >
-            {t.cta}
-          </Link>
-          <LanguageSwitcher pathname={pathname} lang={lang} label={t.language} className="text-base" />
-        </div>
-      )}
+            {/* min-h + py keeps every link reachable on short / landscape screens */}
+            <motion.nav
+              aria-label="Mobile navigation"
+              initial={{ y: -16 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
+              className="min-h-full flex flex-col items-center justify-center gap-6 pt-24 pb-12"
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMenu}
+                  aria-current={pathname === link.href ? "page" : undefined}
+                  className={`px-4 py-2 text-3xl font-extrabold tracking-tight transition-colors ${
+                    pathname === link.href ? "text-crimson" : "text-white hover:text-crimson"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href={waitlistHref}
+                onClick={closeMenu}
+                className="mt-4 px-8 py-3.5 rounded-full bg-crimson text-white font-semibold tracking-wide hover:bg-crimson-dark transition-colors"
+              >
+                {t.cta}
+              </Link>
+              <LanguageSwitcher
+                pathname={pathname}
+                lang={lang}
+                label={t.language}
+                onNavigate={closeMenu}
+                className="text-base"
+                linkClassName="inline-flex items-center justify-center min-w-11 min-h-11"
+              />
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
